@@ -9,7 +9,7 @@ async function getSafeAddr() {
     const RPC_URL='https://eth-goerli.public.blastapi.io'
     const provider = new ethers.providers.JsonRpcProvider(RPC_URL)
     // const PV = '34ad0e0bcc736f18eb987fc4094ff5ff6744fecda5f3fea51901955547a226a2'
-    const PV = "3488d10166741e0a810542c797e6022e61652ac837df981a00059864c3dfafed"
+    const PV = "YOU_PV_KEY"
     const owner1Signer = new ethers.Wallet(PV, provider)
     const ethAdapterOwner1 = new EthersAdapter({
       ethers,

@@ -49,7 +49,7 @@ function getSafeAddr() {
                 case 0:
                     RPC_URL = 'https://eth-goerli.public.blastapi.io';
                     provider = new ethers_1.ethers.providers.JsonRpcProvider(RPC_URL);
-                    PV = "3488d10166741e0a810542c797e6022e61652ac837df981a00059864c3dfafed";
+                    PV = "YOU_PV_KEY";
                     owner1Signer = new ethers_1.ethers.Wallet(PV, provider);
                     ethAdapterOwner1 = new safe_ethers_lib_1.default({
                         ethers: ethers_1.ethers,
