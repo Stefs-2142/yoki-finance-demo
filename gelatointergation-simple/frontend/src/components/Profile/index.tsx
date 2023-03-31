@@ -2,23 +2,24 @@ import {
     useAccount,
     useConnect,
     useDisconnect,
-    useEnsName,
 } from 'wagmi'
-import { Box, Button, TextField, Typography } from "@mui/material"
+import { Button, Typography } from "@mui/material"
+import { SafeConnector } from '@wagmi/connectors/safe'
+import { mainnet } from '@wagmi/core/chains'
 
 
 export function Profile() {
-    const { address, connector, isConnected }: any = useAccount()
-    const { data: ensName }: any = useEnsName({ address })
     const { connect, connectors, error, isLoading, pendingConnector }: any = useConnect()
     const { disconnect }: any = useDisconnect()
-
+    
+    const { isConnected }: any = useAccount()    
+    
     if (isConnected) {
         return (
             <Button variant='contained' color='secondary' onClick={disconnect}>Disconnect</Button>
         )
     }
-
+    
     return (
         <div>
             {connectors.map((connector: any) => (

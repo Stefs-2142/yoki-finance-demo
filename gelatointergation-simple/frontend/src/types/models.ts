@@ -1,4 +1,4 @@
-interface CreateTaskOptions {
+export interface CreateTaskOptions {
     name: string;             // your task name
   
     // Function to execute
@@ -27,9 +27,3 @@ interface CreateTaskOptions {
     // Optional: Payment params
     useTreasury?: boolean;    // use false if your task is self-paying (default: true)
 }
-
-
-export {
-    CreateTaskOptions
-}
-
