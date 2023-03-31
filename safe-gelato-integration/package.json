@@ -1,0 +1,13 @@
+{
+  "dependencies": {
+    "@gelatonetwork/automate-sdk": "^2.1.0",
+    "@safe-global/safe-core-sdk": "^3.3.2",
+    "@safe-global/safe-ethers-lib": "^1.9.2",
+    "@safe-global/safe-service-client": "^2.0.0",
+    "cors": "^2.8.5",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "hardhat": "^2.13.0"
+  }
+}
