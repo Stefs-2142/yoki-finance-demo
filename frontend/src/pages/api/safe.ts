@@ -1,3 +1,20 @@
+// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+import type { NextApiRequest, NextApiResponse } from 'next'
+
+type Data = {
+  name: string
+}
+
+export default function handler(
+  req: NextApiRequest,
+  res: NextApiResponse<Data>
+) {
+  res.status(200).json({ name: 'John Doe' })
+}
+
+
+
+/*
 import { ethers, Contract } from 'ethers'
 import EthersAdapter from '@safe-global/safe-ethers-lib'
 import { SafeFactory } from '@safe-global/safe-core-sdk'
@@ -96,3 +113,42 @@ async function createStrategy() {
 export {
   createStrategy
 }
+*/
+
+
+
+/*  PROXY
+
+
+
+
+import * as express from "express";
+import {createStrategy} from "./src/safe"
+
+var cors = require('cors')
+
+const express = require("express");
+const app = express();
+app.use(cors())
+app.use(express.json());
+
+app.post('/api', cors(), async(req, res) => {
+    const msg = "SERVER!"
+    console.log(msg);
+
+    await createStrategy() 
+    res.status(200);
+    res.send({"OK": 200});    
+});
+
+const port = 7070;
+app.listen(port, () => {
+  console.log(`Server is listening on port ${port}.`);
+});
+process.on('SIGINT', function() {
+  console.log( "\nGracefully shutting down from SIGINT (Ctrl-C)" );
+  process.exit(0);
+});
+
+
+*/
