@@ -4,9 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "lint": "next lint",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+
+    "system:prune": "rm -rf .next node_modules package-lock.json"
   },
   "dependencies": {
     "@types/node": "18.15.11",
