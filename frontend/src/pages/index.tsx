@@ -291,7 +291,7 @@ export default function Home() {
   );
 
   const unloggedInView = (
-    <button onClick={login} className="card">
+    <button onClick={login}>
       Login
     </button>
   );
