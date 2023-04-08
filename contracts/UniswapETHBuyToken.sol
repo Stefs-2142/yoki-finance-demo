@@ -1,36 +1,31 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
+pragma solidity 0.8.8;
 
+import "https://github.com/Uniswap/uniswap-v2-periphery/blob/master/contracts/interfaces/IUniswapV2Router02.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
-import "@openzeppelin/contracts/utils/math/SafeMath.sol";
-import "@openzeppelin/contracts/interfaces/UniswapV2/IUniswapV2Router02.sol";
+import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 
-contract BuyTokenOnUniswap {
-    using SafeMath for uint256;
+contract SwapEthToToken {
+    using SafeERC20 for IERC20;
+    address internal constant UNISWAP_ROUTER_ADDRESS = 0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D;
 
-    address public uniswapRouterAddress;
     IUniswapV2Router02 public uniswapRouter;
 
     constructor() {
-        uniswapRouterAddress = address(0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D);
-        uniswapRouter = IUniswapV2Router02(uniswapRouterAddress);
+        uniswapRouter = IUniswapV2Router02(UNISWAP_ROUTER_ADDRESS);
     }
 
-    function buyToken(address _tokenAddressOut, uint256 _amountOutMin) external payable {
+    function convertEthToToken(uint _minTokenAmount, address _tokenAddress) public payable {
+        uint deadline = block.timestamp + 15; // using 'now' for convenience, for mainnet pass deadline from frontend!
+        uniswapRouter.swapExactETHForTokens{ value: msg.value }(_minTokenAmount, getPathForETHtoToken(_tokenAddress), msg.sender, deadline);
 
-        // Set up Uniswap path and deadline;
-        uint256 amountOutMin = _amountOutMin;
-        address[] memory path = new address[](2);
-        path[0] =  uniswapRouter.WETH();
-        path[1] = _tokenAddressOut;
-        uint256 deadline = block.timestamp + 600; // 10 minute deadline
-
-        // Perform the swap
-        uniswapRouter.swapETHForExactTokens{value: msg.value}(
-            amountOutMin,
-            path,
-            msg.sender,
-            deadline
-        );
     }
-}
+
+    function getPathForETHtoToken(address tokenAddress) private view returns (address[] memory) {
+      address[] memory path = new address[](2);
+      path[0] = uniswapRouter.WETH();
+      path[1] = tokenAddress;
+      
+      return path;
+    }
+  }
